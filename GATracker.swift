@@ -148,16 +148,13 @@ class GATracker {
         self.send("event", params: params)
     }
     
-    func measure(category: String, interval: UInt64, name : String, var label: String?, customParameters: Dictionary<String, String>?) {
+    func measure(category: String, interval: UInt64, name : String, label: String?, customParameters: Dictionary<String, String>?) {
         /*
         An event hit with category, interval, name, label
         */
-        if label == nil {
-            label = ""
-        }
         
         //measure parameters category, interval, name and label
-        var params = ["utc" : category, "utv" : name, "utl" : label!, "utt" : "\(interval)"]
+        var params = ["utc" : category, "utv" : name, "utl" : label ?? "", "utt" : "\(interval)"]
         if (customParameters != nil) {
             for (key, value) in customParameters! {
                 params.updateValue(value, forKey: key)
